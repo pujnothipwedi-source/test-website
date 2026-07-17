@@ -1,0 +1,246 @@
+/* ============================================
+   เขียวสบาย — Navbar
+   โทนสี: เขียวป่า สงบ ธรรมชาติ
+   ============================================ */
+
+:root {
+  --bg-mist:     #EEF3E8;   /* พื้นหลัง navbar หมอกเช้า */
+  --forest:      #2E4630;   /* เขียวเข้ม ตัวหนังสือ/โลโก้ */
+  --moss:        #86A78B;   /* เขียวมอส ใบไม้ */
+  --sage:        #4F6B54;   /* เขียวเซจ ตัวอักษรเมนู */
+  --sand:        #FBFAF3;   /* ครีมอ่อน สำหรับพื้นหลังหน้า */
+  --sun:         #E1A93F;   /* เหลืองแดดอ่อน ปุ่มติดต่อ */
+  --sun-deep:    #C98F2B;
+
+  --font-display: "Chonburi", "Fraunces", serif;
+  --font-body:    "Sarabun", "Fraunces", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--sand);
+  font-family: var(--font-body);
+  color: var(--forest);
+}
+
+/* ---------- Navbar shell ---------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-mist);
+  border-bottom: 1px solid rgba(46, 70, 48, 0.12);
+  box-shadow: 0 6px 18px -14px rgba(46, 70, 48, 0.4);
+}
+
+.navbar__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ---------- Brand / logo ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.brand__leaf {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  transition: transform 0.4s ease;
+}
+
+.brand:hover .brand__leaf {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--forest);
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Menu links + vine-sprout hover ---------- */
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.menu__link {
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.98rem;
+  color: var(--sage);
+  padding-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.menu__link:hover,
+.menu__link:focus-visible {
+  color: var(--forest);
+}
+
+/* the vine line */
+.menu__link::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 2px;
+  height: 2px;
+  width: 0;
+  background: var(--moss);
+  border-radius: 2px;
+  transition: width 0.45s cubic-bezier(0.33, 1, 0.68, 1) 0.05s;
+}
+
+/* the little leaf bud that sprouts first */
+.menu__link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 10px;
+  height: 8px;
+  background: var(--moss);
+  border-radius: 0 100% 0 100%;
+  transform: scale(0) rotate(-10deg);
+  transform-origin: left bottom;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu__link:hover::before,
+.menu__link:focus-visible::before {
+  opacity: 1;
+  transform: scale(1) rotate(-10deg);
+}
+
+.menu__link:hover::after,
+.menu__link:focus-visible::after {
+  width: calc(100% - 16px);
+}
+
+/* ---------- Contact icon button ---------- */
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: var(--sun);
+  color: #3A2A08;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 9px 18px 9px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px -6px rgba(225, 169, 63, 0.7);
+  animation: breathe 4s ease-in-out infinite;
+  transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-btn svg {
+  width: 18px;
+  height: 18px;
+  color: #3A2A08;
+}
+
+.contact-btn:hover,
+.contact-btn:focus-visible {
+  background: var(--sun-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -6px rgba(201, 143, 43, 0.65);
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.045); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-btn { animation: none; }
+  .brand__leaf, .menu__link::after, .menu__link::before, .contact-btn { transition: none; }
+}
+
+/* ---------- Mobile hamburger ---------- */
+
+.menu-toggle { display: none; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--forest);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 780px) {
+  .hamburger { display: flex; order: 3; }
+
+  .menu {
+    order: 4;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .menu__link { padding: 10px 4px; width: 100%; }
+
+  .menu-toggle:checked ~ .menu {
+    max-height: 320px;
+  }
+
+  .menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+  .menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .contact-btn { order: 2; padding: 8px 14px; }
+  .contact-btn span { display: none; }
+}
+
+/* ---------- Demo content (ลบออกได้เมื่อนำไปใช้จริง) ---------- */
+
+.demo {
+  max-width: 1120px;
+  margin: 80px auto;
+  padding: 0 28px;
+  text-align: center;
+}
+
+.demo h1 {
+  font-family: var(--font-display);
+  color: var(--forest);
+  font-size: 2.1rem;
+}
+
+.demo p {
+  color: var(--sage);
+}

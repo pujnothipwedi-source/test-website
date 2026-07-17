@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เขียวสบาย — Navbar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Chonburi&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar__inner">
+
+    <!-- โลโก้ -->
+    <a href="#" class="brand">
+      <svg class="brand__leaf" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 4C11 8 6 16 8 26c1.5 7 8 10 14 8-2-8-1-15 4-21 3.5-4.5 3-9 3-9-4 0-7 1-9-1z" fill="var(--moss)"/>
+        <path d="M9 27C15 23 18 17 20 9" stroke="var(--forest)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">เขียวสบาย</span>
+    </a>
+
+    <!-- ปุ่มเมนูมือถือ -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
+    <label for="menu-toggle" class="hamburger" aria-label="เปิดเมนู">
+      <span></span><span></span><span></span>
+    </label>
+
+    <!-- เมนูหลัก -->
+    <nav class="menu" aria-label="เมนูหลัก">
+      <a href="#" class="menu__link">หน้าแรก</a>
+      <a href="#" class="menu__link">เกี่ยวกับเรา</a>
+      <a href="#" class="menu__link">บริการ</a>
+      <a href="#" class="menu__link">บทความ</a>
+    </nav>
+
+    <!-- ไอคอนติดต่อ -->
+    <a href="#contact" class="contact-btn" aria-label="ติดต่อเรา">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M4.5 6.5 12 13l7.5-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ติดต่อ</span>
+    </a>
+
+  </div>
+</header>
+
+<!-- ตัวอย่างเนื้อหาด้านล่างเพื่อดูผลลัพธ์ -->
+<main class="demo">
+  <h1>สวนหลังบ้านของเรา</h1>
+  <p>เลื่อนดู หรือย่อหน้าจอเพื่อดูเมนูแบบมือถือ 🌿</p>
+</main>
+
+</body>
+</html>

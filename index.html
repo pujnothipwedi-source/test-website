@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เขียวสบาย — Navbar</title>
+<title>เขียวสบาย — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Chonburi&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -48,10 +48,44 @@
   </div>
 </header>
 
-<!-- ตัวอย่างเนื้อหาด้านล่างเพื่อดูผลลัพธ์ -->
-<main class="demo">
-  <h1>สวนหลังบ้านของเรา</h1>
-  <p>เลื่อนดู หรือย่อหน้าจอเพื่อดูเมนูแบบมือถือ 🌿</p>
+<!-- ===== Main content: แนะนำตัว (Nadia) 2 คอลัมน์ ===== -->
+<main>
+  <section class="portfolio">
+    <div class="portfolio__text">
+      <p class="portfolio__eyebrow">สวัสดี ฉันคือ</p>
+      <h1 class="portfolio__name">Nadia</h1>
+      <p class="portfolio__bio">
+        นักออกแบบที่เชื่อว่าพื้นที่สีเขียวเล็ก ๆ เปลี่ยนบ้านให้กลายเป็นที่พักใจได้
+        ถนัดงานจัดสวน ตกแต่งมุมพักผ่อน และดูแลต้นไม้ในบ้านให้เติบโตอย่างมีความสุข
+      </p>
+      <div class="portfolio__tags">
+        <span class="portfolio__tag">จัดสวน</span>
+        <span class="portfolio__tag">ตกแต่งภายใน</span>
+        <span class="portfolio__tag">ดูแลต้นไม้</span>
+      </div>
+      <div class="portfolio__stats">
+        <div class="stat"><b>7+</b><span>ปีประสบการณ์</span></div>
+        <div class="stat"><b>120</b><span>โปรเจกต์</span></div>
+        <div class="stat"><b>98%</b><span>ลูกค้าพึงพอใจ</span></div>
+      </div>
+      <a href="#work" class="portfolio__cta">ดูผลงานของฉัน →</a>
+    </div>
+
+    <figure class="portfolio__figure">
+      <div class="portfolio__frame">
+        <img src="./assets/pngtree-group-of-kittens-on-a-black-background-picture-image_3402939.jpg" alt="Nadia">
+      </div>
+      <svg class="portfolio__vein" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 4C11 8 6 16 8 26c1.5 7 8 10 14 8-2-8-1-15 4-21 3.5-4.5 3-9 3-9-4 0-7 1-9-1z" fill="var(--sun)" opacity="0.9"/>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ตัวอย่างเนื้อหาด้านล่างเพื่อดูผลลัพธ์ -->
+  <div class="demo">
+    <h1>สวนหลังบ้านของเรา</h1>
+    <p>เลื่อนดู หรือย่อหน้าจอเพื่อดูเมนูแบบมือถือ 🌿</p>
+  </div>
 </main>
 
 </body>

@@ -4,19 +4,21 @@
    ============================================ */
 
 :root {
-  --bg-mist:     #EEF3E8;   /* พื้นหลัง navbar หมอกเช้า */
-  --forest:      #2E4630;   /* เขียวเข้ม ตัวหนังสือ/โลโก้ */
-  --moss:        #86A78B;   /* เขียวมอส ใบไม้ */
-  --sage:        #4F6B54;   /* เขียวเซจ ตัวอักษรเมนู */
-  --sand:        #FBFAF3;   /* ครีมอ่อน สำหรับพื้นหลังหน้า */
-  --sun:         #E1A93F;   /* เหลืองแดดอ่อน ปุ่มติดต่อ */
-  --sun-deep:    #C98F2B;
+  --bg-mist: #eef3e8; /* พื้นหลัง navbar หมอกเช้า */
+  --forest: #2e4630; /* เขียวเข้ม ตัวหนังสือ/โลโก้ */
+  --moss: #86a78b; /* เขียวมอส ใบไม้ */
+  --sage: #4f6b54; /* เขียวเซจ ตัวอักษรเมนู */
+  --sand: #fbfaf3; /* ครีมอ่อน สำหรับพื้นหลังหน้า */
+  --sun: #e1a93f; /* เหลืองแดดอ่อน ปุ่มติดต่อ */
+  --sun-deep: #c98f2b;
 
   --font-display: "Chonburi", "Fraunces", serif;
-  --font-body:    "Sarabun", "Fraunces", sans-serif;
+  --font-body: "Sarabun", "Fraunces", sans-serif;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -123,7 +125,9 @@ body {
   transform: scale(0) rotate(-10deg);
   transform-origin: left bottom;
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .menu__link:hover::before,
@@ -145,20 +149,23 @@ body {
   gap: 8px;
   text-decoration: none;
   background: var(--sun);
-  color: #3A2A08;
+  color: #3a2a08;
   font-weight: 600;
   font-size: 0.92rem;
   padding: 9px 18px 9px 14px;
   border-radius: 999px;
   box-shadow: 0 4px 14px -6px rgba(225, 169, 63, 0.7);
   animation: breathe 4s ease-in-out infinite;
-  transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .contact-btn svg {
   width: 18px;
   height: 18px;
-  color: #3A2A08;
+  color: #3a2a08;
 }
 
 .contact-btn:hover,
@@ -169,18 +176,32 @@ body {
 }
 
 @keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.045); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contact-btn { animation: none; }
-  .brand__leaf, .menu__link::after, .menu__link::before, .contact-btn { transition: none; }
+  .contact-btn {
+    animation: none;
+  }
+  .brand__leaf,
+  .menu__link::after,
+  .menu__link::before,
+  .contact-btn {
+    transition: none;
+  }
 }
 
 /* ---------- Mobile hamburger ---------- */
 
-.menu-toggle { display: none; }
+.menu-toggle {
+  display: none;
+}
 
 .hamburger {
   display: none;
@@ -195,11 +216,16 @@ body {
   height: 2px;
   background: var(--forest);
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 @media (max-width: 780px) {
-  .hamburger { display: flex; order: 3; }
+  .hamburger {
+    display: flex;
+    order: 3;
+  }
 
   .menu {
     order: 4;
@@ -212,18 +238,32 @@ body {
     transition: max-height 0.4s ease;
   }
 
-  .menu__link { padding: 10px 4px; width: 100%; }
+  .menu__link {
+    padding: 10px 4px;
+    width: 100%;
+  }
 
   .menu-toggle:checked ~ .menu {
     max-height: 320px;
   }
 
-  .menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-  .menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu-toggle:checked ~ .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle:checked ~ .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle:checked ~ .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
 
-  .contact-btn { order: 2; padding: 8px 14px; }
-  .contact-btn span { display: none; }
+  .contact-btn {
+    order: 2;
+    padding: 8px 14px;
+  }
+  .contact-btn span {
+    display: none;
+  }
 }
 
 /* ---------- Demo content (ลบออกได้เมื่อนำไปใช้จริง) ---------- */
@@ -243,4 +283,171 @@ body {
 
 .demo p {
   color: var(--sage);
+}
+
+/* ============================================
+   Portfolio intro — แนะนำตัว (Nadia)
+   ใช้ token ชุดเดียวกับ navbar: --forest / --moss / --sage / --sand / --sun
+   ============================================ */
+
+.portfolio {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 100px 28px 120px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.portfolio__eyebrow {
+  font-family: var(--font-display);
+  color: var(--sage);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 18px;
+}
+
+.portfolio__name {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  color: var(--forest);
+  margin: 0 0 22px;
+}
+
+.portfolio__bio {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--forest);
+  opacity: 0.82;
+  max-width: 46ch;
+  margin: 0 0 28px;
+}
+
+.portfolio__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 36px;
+}
+
+.portfolio__tag {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(134, 167, 139, 0.16); /* --moss */
+  color: var(--forest);
+  border: 1px solid rgba(134, 167, 139, 0.4);
+}
+
+.portfolio__stats {
+  display: flex;
+  gap: 40px;
+  margin: 0 0 36px;
+}
+
+.portfolio__stats .stat b {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-size: 1.9rem;
+  color: var(--forest);
+}
+
+.portfolio__stats .stat span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--sage);
+}
+
+.portfolio__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--sun);
+  color: #3a2a08;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 14px 26px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px -6px rgba(225, 169, 63, 0.7);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.portfolio__cta:hover,
+.portfolio__cta:focus-visible {
+  background: var(--sun-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -6px rgba(201, 143, 43, 0.65);
+}
+
+/* ---------- image side: leaf-clipped frame ---------- */
+
+.portfolio__figure {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+.portfolio__figure::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  background: rgba(225, 169, 63, 0.18); /* --sun */
+  clip-path: path(
+    "M210 8C120 8 20 70 8 170C-4 270 60 360 150 400C240 440 340 400 390 320C440 240 420 130 350 60C310 20 260 8 210 8Z"
+  );
+  transform: scale(1.02) rotate(-4deg);
+  z-index: 0;
+}
+
+.portfolio__frame {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  clip-path: path(
+    "M210 8C120 8 20 70 8 170C-4 270 60 360 150 400C240 440 340 400 390 320C440 240 420 130 350 60C310 20 260 8 210 8Z"
+  );
+  box-shadow: 0 30px 60px -20px rgba(46, 70, 48, 0.35);
+}
+
+.portfolio__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio__vein {
+  position: absolute;
+  top: -14px;
+  right: -22px;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+@media (max-width: 860px) {
+  .portfolio {
+    grid-template-columns: 1fr;
+    padding: 72px 24px 80px;
+  }
+  .portfolio__figure {
+    order: -1;
+    max-width: 300px;
+  }
+  .portfolio__stats {
+    gap: 28px;
+  }
 }

@@ -1,92 +1,88 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เขียวสบาย — Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>คำนวณเกรด · Leafy GPA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Chonburi&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header class="navbar">
-  <div class="navbar__inner">
-
-    <!-- โลโก้ -->
-    <a href="#" class="brand">
-      <svg class="brand__leaf" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M20 4C11 8 6 16 8 26c1.5 7 8 10 14 8-2-8-1-15 4-21 3.5-4.5 3-9 3-9-4 0-7 1-9-1z" fill="var(--moss)"/>
-        <path d="M9 27C15 23 18 17 20 9" stroke="var(--forest)" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-      <span class="brand__name">เขียวสบาย</span>
-    </a>
-
-    <!-- ปุ่มเมนูมือถือ -->
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
-    <label for="menu-toggle" class="hamburger" aria-label="เปิดเมนู">
-      <span></span><span></span><span></span>
-    </label>
-
-    <!-- เมนูหลัก -->
-    <nav class="menu" aria-label="เมนูหลัก">
-      <a href="#" class="menu__link">หน้าแรก</a>
-      <a href="#" class="menu__link">เกี่ยวกับเรา</a>
-      <a href="#" class="menu__link">บริการ</a>
-      <a href="#" class="menu__link">บทความ</a>
-    </nav>
-
-    <!-- ไอคอนติดต่อ -->
-    <a href="#contact" class="contact-btn" aria-label="ติดต่อเรา">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M4.5 6.5 12 13l7.5-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>ติดต่อ</span>
-    </a>
-
+  <div class="meadow" aria-hidden="true">
+    <svg class="meadow__svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 C240,110 480,10 720,50 C960,90 1200,20 1440,60 L1440,120 L0,120 Z"></path>
+    </svg>
   </div>
-</header>
 
-<!-- ===== Main content: แนะนำตัว (Nadia) 2 คอลัมน์ ===== -->
-<main>
-  <section class="portfolio">
-    <div class="portfolio__text">
-      <p class="portfolio__eyebrow">สวัสดี ฉันคือ</p>
-      <h1 class="portfolio__name">Nadia</h1>
-      <p class="portfolio__bio">
-        นักออกแบบที่เชื่อว่าพื้นที่สีเขียวเล็ก ๆ เปลี่ยนบ้านให้กลายเป็นที่พักใจได้
-        ถนัดงานจัดสวน ตกแต่งมุมพักผ่อน และดูแลต้นไม้ในบ้านให้เติบโตอย่างมีความสุข
-      </p>
-      <div class="portfolio__tags">
-        <span class="portfolio__tag">จัดสวน</span>
-        <span class="portfolio__tag">ตกแต่งภายใน</span>
-        <span class="portfolio__tag">ดูแลต้นไม้</span>
+  <main class="page">
+
+    <header class="header">
+      <div class="header__mark">
+        <svg viewBox="0 0 48 48" class="leaf-icon" aria-hidden="true">
+          <path d="M10 38 C6 24 14 8 34 6 C40 24 34 40 18 42 C14 42.6 11.6 41 10 38 Z"></path>
+          <path d="M12 38 C20 30 26 20 33 8" class="leaf-vein"></path>
+        </svg>
       </div>
-      <div class="portfolio__stats">
-        <div class="stat"><b>7+</b><span>ปีประสบการณ์</span></div>
-        <div class="stat"><b>120</b><span>โปรเจกต์</span></div>
-        <div class="stat"><b>98%</b><span>ลูกค้าพึงพอใจ</span></div>
+      <div class="header__text">
+        <p class="eyebrow">Leafy GPA</p>
+        <h1>ตัวคำนวณเกรดเฉลี่ย</h1>
+        <p class="subtitle">ใส่รายวิชา หน่วยกิต และคะแนน ระบบจะคำนวณเกรดและ GPA ให้ทันที</p>
       </div>
-      <a href="#work" class="portfolio__cta">ดูผลงานของฉัน →</a>
-    </div>
+    </header>
 
-    <figure class="portfolio__figure">
-      <div class="portfolio__frame">
-        <img src="./assets/pngtree-group-of-kittens-on-a-black-background-picture-image_3402939.jpg" alt="Nadia">
+    <section class="card" aria-label="รายวิชา">
+
+      <div class="table-head" role="row">
+        <span>รายวิชา</span>
+        <span>หน่วยกิต</span>
+        <span>คะแนน (0–100)</span>
+        <span class="table-head__grade">เกรด</span>
+        <span class="table-head__action"></span>
       </div>
-      <svg class="portfolio__vein" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M20 4C11 8 6 16 8 26c1.5 7 8 10 14 8-2-8-1-15 4-21 3.5-4.5 3-9 3-9-4 0-7 1-9-1z" fill="var(--sun)" opacity="0.9"/>
-      </svg>
-    </figure>
-  </section>
 
-  <!-- ตัวอย่างเนื้อหาด้านล่างเพื่อดูผลลัพธ์ -->
-  <div class="demo">
-    <h1>สวนหลังบ้านของเรา</h1>
-    <p>เลื่อนดู หรือย่อหน้าจอเพื่อดูเมนูแบบมือถือ 🌿</p>
-  </div>
-</main>
+      <div id="rows" class="rows"></div>
 
+      <button id="addRow" class="add-btn" type="button">
+        <svg viewBox="0 0 20 20" class="add-btn__icon" aria-hidden="true">
+          <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        เพิ่มรายวิชา
+      </button>
+
+    </section>
+
+    <section class="result" aria-live="polite">
+      <div class="result__badge">
+        <svg viewBox="0 0 64 64" class="badge-leaf" aria-hidden="true">
+          <path d="M12 50 C6 32 16 10 44 8 C52 32 42 52 22 55 C17 55.8 14 54 12 50 Z"></path>
+        </svg>
+        <span id="letterGrade" class="badge-leaf__letter">–</span>
+      </div>
+      <div class="result__figures">
+        <div class="figure">
+          <span class="figure__value" id="gpaValue">0.00</span>
+          <span class="figure__label">GPA</span>
+        </div>
+        <div class="figure figure--muted">
+          <span class="figure__value" id="avgValue">0.0</span>
+          <span class="figure__label">คะแนนเฉลี่ยถ่วงน้ำหนัก</span>
+        </div>
+        <div class="figure figure--muted">
+          <span class="figure__value" id="creditValue">0</span>
+          <span class="figure__label">หน่วยกิตรวม</span>
+        </div>
+      </div>
+    </section>
+
+    <p class="scale-note">
+      เกณฑ์: A ≥80 · B+ 75–79 · B 70–74 · C+ 65–69 · C 60–64 · D+ 55–59 · D 50–54 · F &lt;50
+    </p>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

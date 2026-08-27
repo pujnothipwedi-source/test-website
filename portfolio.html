@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THIPWADEE PUTJNO — พอร์ตโฟลิโอ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4FAF1;
+    --bg-soft: #EAF6E6;
+    --card: #FFFFFF;
+    --deep: #33604A;
+    --deep-2: #2A4E3D;
+    --mid: #7FB08F;
+    --pastel: #D9EFDA;
+    --highlight: #E9F3C9;
+    --text: #26352B;
+    --muted: #62786A;
+    --line: #CFE8D3;
+    --shadow: 0 12px 30px rgba(51, 96, 74, 0.10);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4{
+    font-family: 'Kanit', sans-serif;
+    color: var(--deep-2);
+    margin: 0;
+  }
+  a{ color: inherit; }
+  ::selection{ background: var(--pastel); color: var(--deep-2); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
+  }
+
+  /* ---------- background texture ---------- */
+  .bg-blob{
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .blob-1{ width: 420px; height: 420px; background: var(--pastel); top: -120px; right: -100px; }
+  .blob-2{ width: 320px; height: 320px; background: var(--highlight); bottom: 10%; left: -140px; }
+  .blob-3{ width: 260px; height: 260px; background: var(--mid); opacity: 0.18; top: 45%; right: -80px; }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 6vw;
+    background: rgba(244, 250, 241, 0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    transition: padding .3s ease;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    color: var(--deep);
+    font-size: 1.05rem;
+    letter-spacing: .3px;
+  }
+  .logo svg{ width: 22px; height: 22px; }
+  .nav-links{
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 0.92rem;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: var(--deep-2);
+    position: relative;
+    padding: 4px 2px;
+  }
+  .nav-links a::after{
+    content:"";
+    position: absolute;
+    left: 0; bottom: -2px;
+    height: 2px; width: 0%;
+    background: var(--mid);
+    transition: width .25s ease;
+  }
+  .nav-links a:hover::after{ width: 100%; }
+  .nav-toggle{ display: none; background: none; border: none; cursor: pointer; }
+  .nav-toggle svg{ width: 26px; height: 26px; color: var(--deep); }
+
+  @media (max-width: 760px){
+    .nav-links{
+      position: fixed;
+      top: 60px; right: -100%;
+      flex-direction: column;
+      background: var(--card);
+      width: 72%;
+      max-width: 300px;
+      height: calc(100vh - 60px);
+      padding: 36px 30px;
+      gap: 26px;
+      box-shadow: var(--shadow);
+      transition: right .35s ease;
+    }
+    .nav-links.open{ right: 0; }
+    .nav-toggle{ display: block; }
+  }
+
+  section{ padding: 120px 6vw 40px; max-width: 1100px; margin: 0 auto; }
+  .eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--mid);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 18px; height: 2px;
+    background: var(--mid);
+  }
+  .section-title{ font-size: clamp(1.6rem, 3vw, 2.3rem); margin-bottom: 44px; }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    padding-top: 90px;
+    position: relative;
+  }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 50px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-tag{
+    display: inline-block;
+    background: var(--pastel);
+    color: var(--deep);
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.82rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .hero h1{
+    font-size: clamp(2.3rem, 5.2vw, 3.6rem);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+  .hero h1 span{ color: var(--mid); }
+  .hero p.lead{
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 1.08rem;
+    max-width: 46ch;
+  }
+  .hero-cta{ margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    padding: 13px 20px;
+    border-radius: 200px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid transparent;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-solid{ background: var(--deep); color: #fff; box-shadow: var(--shadow); }
+  .btn-solid:hover{ transform: translateY(-3px); }
+  .btn-outline{ border-color: var(--mid); color: var(--deep-2); }
+  .btn-outline:hover{ background: var(--pastel); transform: translateY(-3px); }
+
+  .hero-portrait{
+    position: relative;
+    justify-self: center;
+  }
+  .portrait-frame{
+    width: min(200px, 40px);
+    height: min(200px, 40vw);
+    border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
+    background: linear-gradient(160deg, var(--pastel), var(--mid) 130%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    animation: morph 9s ease-in-out infinite;
+    position: relative;
+  }
+  .portrait-frame span{
+    font-family: 'Kanit', sans-serif;
+    font-size: 4.2rem;
+    font-weight: 600;
+    color: var(--deep-2);
+  }
+  @keyframes morph{
+    0%,100%{ border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%; }
+    50%{ border-radius: 58% 42% 37% 63% / 55% 60% 40% 45%; }
+  }
+  .leaf-orbit{
+    position: absolute;
+    width: 34px; height: 34px;
+    color: var(--deep);
+    animation: orbit 12s linear infinite;
+  }
+  @keyframes orbit{
+    from{ transform: rotate(0deg) translateX(175px) rotate(0deg); }
+    to{ transform: rotate(360deg) translateX(175px) rotate(-360deg); }
+  }
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; text-align: center; }
+    .hero p.lead{ margin-left: auto; margin-right: auto; }
+    .hero-cta{ justify-content: center; }
+    .leaf-orbit{ display: none; }
+  }
+
+  .scroll-cue{
+    position: absolute;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px;
+    color: var(--mid);
+    font-size: 0.75rem;
+    font-family: 'Kanit', sans-serif;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,6px);} }
+
+  /* ---------- about ---------- */
+  .about-wrap{
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .about-note{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+  }
+  .about-note p{ color: var(--muted); }
+  .info-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .info-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px 22px;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .info-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow); }
+  .info-card .k{
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.76rem;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .info-card .v{ font-weight: 500; font-size: 1.02rem; color: var(--deep-2); }
+  @media (max-width: 860px){
+    .about-wrap{ grid-template-columns: 1fr; }
+    .info-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px){
+    .info-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- education timeline (vine signature) ---------- */
+  .timeline{
+    position: relative;
+    padding-left: 46px;
+  }
+  .vine-svg{
+    position: absolute;
+    left: 0; top: 0;
+    width: 46px;
+    height: 100%;
+  }
+  .vine-path{
+    fill: none;
+    stroke: var(--mid);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 1.6s ease;
+  }
+  .vine-path.in{ stroke-dashoffset: 0; }
+  .tl-item{
+    position: relative;
+    padding: 6px 0 46px 26px;
+  }
+  .tl-item:last-child{ padding-bottom: 6px; }
+  .tl-dot{
+    position: absolute;
+    left: -46px;
+    top: 8px;
+    width: 30px; height: 30px;
+    background: var(--pastel);
+    border: 2px solid var(--mid);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-dot svg{ width: 15px; height: 15px; color: var(--deep); }
+  .tl-item .stage{
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+  .tl-item h3{ font-size: 1.18rem; }
+  .tl-item .years{ color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+  .tl-item p.detail{ margin-top: 8px; color: var(--muted); max-width: 60ch; }
+
+  /* ---------- experience / competitions ---------- */
+  .card-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+  }
+  .item-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 2px 10px rgba(51,96,74,0.05);
+    transition: transform .28s ease, box-shadow .28s ease;
+  }
+  .item-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow); }
+  .item-icon{
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--pastel);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .item-icon svg{ width: 22px; height: 22px; color: var(--deep); }
+  .item-card h4{ font-size: 1.05rem; margin-bottom: 6px; }
+  .item-card .tag{ color: var(--mid); font-size: 0.82rem; font-family: 'Kanit',sans-serif; margin-bottom: 8px; display:block; }
+  .item-card p{ color: var(--muted); font-size: 0.94rem; margin: 0; }
+
+  .subhead{
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.05rem;
+    color: var(--deep);
+    margin: 48px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .subhead svg{ width: 20px; height: 20px; color: var(--mid); }
+  .subhead:first-child{ margin-top: 0; }
+
+  /* ---------- certificates ---------- */
+  .cert-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  .cert-card{
+    background: linear-gradient(160deg, var(--card), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cert-card::before{
+    content:"";
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 90px; height: 90px;
+    background: var(--pastel);
+    border-radius: 50%;
+    opacity: .6;
+  }
+  .cert-ribbon{
+    width: 34px; height: 34px;
+    color: var(--deep);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .cert-card h4{ font-size: 0.98rem; position: relative; }
+  .cert-card .cert-org{ color: var(--muted); font-size: 0.85rem; margin-top: 4px; position: relative; }
+  .cert-card .cert-year{
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.75rem;
+    color: var(--deep);
+    background: var(--pastel);
+    padding: 3px 10px;
+    border-radius: 999px;
+    position: relative;
+  }
+
+  /* ---------- contact ---------- */
+  .contact-box{
+    background: var(--deep);
+    border-radius: 28px;
+    padding: 60px 6vw;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-box::before, .contact-box::after{
+    content:"";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .contact-box::before{ width: 260px; height: 260px; top: -100px; left: -80px; }
+  .contact-box::after{ width: 180px; height: 180px; bottom: -80px; right: -40px; }
+  .contact-box h2{ color: #fff; }
+  .contact-box p{ color: var(--pastel); max-width: 50ch; margin: 14px auto 0; }
+  .contact-links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 36px;
+    position: relative;
+  }
+  .contact-pill{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 12px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.9rem;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .contact-pill:hover{ background: rgba(255,255,255,0.22); transform: translateY(-3px); }
+  .contact-pill svg{ width: 18px; height: 18px; }
+
+  footer{
+    text-align: center;
+    padding: 30px 6vw 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+
+<nav>
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z"/><path d="M12 22V10"/></svg>
+    Portfolio
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" class="nav-link">เกี่ยวกับฉัน</a></li>
+    <li><a href="#education" class="nav-link">การศึกษา</a></li>
+    <li><a href="#certificates" class="nav-link">เกียรติบัตร</a></li>
+    <li><a href="#contact" class="nav-link">ติดต่อ</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="reveal in">
+      <span class="hero-tag">🌿 ระดับชั้นประกาศนียบัตรวิชาชีพชั้นสูง · สาขาเทคโนโลยีธุรกิจดิจิทัล</span>
+      <h1>สวัสดีค่ะ ฉันชื่อ<br><span>THIPWADEE PUTJNO</span></h1>
+      <p class="lead">เพื่อนๆ เรียกฉันว่า "เดีย" ชอบสีเขียว ชอบธรรมชาติ ป่าไม้  ในอนาคต ฉันอยากนำความรู้และประสบการณ์ที่ได้รับไปต่อยอดเป็นธุระกิจของตัวเอง และทำตามความฝันในการมีร้านเค้กที่เป็นพื้นที่เล็กๆ ที่สะท้อนตัวตนฉัน </p>
+      <div class="hero-cta">
+        <a href="#about" class="btn btn-solid">ดูข้อมูลเพิ่มเติม</a>
+        <a href="#contact" class="btn btn-outline">ติดต่อฉัน</a>
+      </div>
+    </div>
+    <div class="hero-portrait reveal in">
+      <div class="portrait-frame"><img src="assets/333.jpg" alt="รูปหน้าปก" style="width: 500px; height: 500px; object-fit: cover; border-radius: 50%;"></div>
+      <svg class="leaf-orbit" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z"/></svg>
+    </div>
+  </div>
+  <div class="scroll-cue">เลื่อนลง ↓</div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="eyebrow reveal">เกี่ยวกับฉัน</div>
+  <h2 class="section-title reveal">ข้อมูลส่วนตัว</h2>
+  <div class="about-wrap">
+    <div class="about-note reveal">
+      <p>ข้อมูลเกี่ยวกับตัวฉัน 🌱</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <div class="k">ชื่อจริง</div>
+        <div class="v">ทิพย์วาดี</div>
+      </div>
+      <div class="info-card reveal">
+        <div class="k">นามสกุล</div>
+        <div class="v">พุจโน</div>
+      </div>
+      <div class="info-card reveal">
+        <div class="k">ชื่อเล่น</div>
+        <div class="v">นาเดีย</div>
+      </div>
+      <div class="info-card reveal">
+        <div class="k">อายุ</div>
+        <div class="v">18 ปี</div>
+      </div>
+      <div class="info-card reveal" style="grid-column: 1 / -1;">
+        <div class="k">วัน เดือน ปีเกิด</div>
+        <div class="v">20 มีนาคม 2551</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="eyebrow reveal">เส้นทางการเรียนรู้</div>
+  <h2 class="section-title reveal">ประวัติการศึกษา</h2>
+
+  <div class="timeline">
+    <svg class="vine-svg" viewBox="0 0 46 560" preserveAspectRatio="none">
+      <path class="vine-path" d="M23 0 C 10 90, 36 180, 23 270 C 10 360, 36 450, 23 560" />
+    </svg>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="stage">ระดับมัธยมศึกษาตอนต้น</div>
+      <h3>โรงเรียนบ้านคลอง 3 (ดรุณศึกษา) </h3>
+      <div class="years">2566</div>
+      <p class="detail"></p>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="stage">ระดับมัธยมศึกษาตอนปลาย</div>
+      <h3>โรงเรียนองครักษ์ · แผนการเรียน ไทย-สังคม </h3>
+      <div class="years">2569</div>
+      <p class="detail"></p>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+      <div class="stage">ปัจจุบัน</div>
+      <h3>วิทยาลัยเทคนิคนครนายก - กำลังศึกษาชั้นอยู่ในระดับชั้นประกาศนียบัตรวิชาชีพชั้นสูง</h3>
+      <div class="years">ปัจจุบัน</div>
+      <p class="detail"></p>
+    </div>
+  </div>
+</section>
+
+ 
+<!-- ================= CERTIFICATES ================= -->
+<section id="certificates">
+  <h2 class="section-title reveal">เกียรติบัตรและใบประกาศนียบัตร</h2>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <svg class="cert-ribbon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+      <h4>เกียรติบัตรการเข้าร่วมการแข่งขันแต่งบทกวี</h4>
+      <img src="assets/2.jpg" alt="เกียรติบัตร" style="max-width:100%;">
+      <div class="cert-org">โรงเรียนองครักษ์</div>
+      <span class="cert-year">2567</span>
+    </div>
+    <div class="cert-card reveal">
+      <svg class="cert-ribbon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+      <h4>เกียรติบัตรการแข่งขันวาดภาพระบายสีประเภทสวยงาม</h4>
+<a href="certificate.jpg" target="_blank">
+    <img src="assets/1.jpg" alt="เกียรติบัตร" style="max-width:100%;">
+         
+</a>
+      <div class="cert-org">โรงเรียนองครักษ์</div>
+      <span class="cert-year">2566</span>
+    </div>
+     <div class="cert-card reveal">
+      <svg class="cert-ribbon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+      <h4>เกียรติบัตรการเข้าร่วมกิจกรรมค่ายวันภาษาไทย</h4>
+<img src="assets/3.jpg" alt="เกียรติบัตร" style="max-width:100%;">
+      <div class="cert-org">โรงเรียนองครักษ์</div>
+      <span class="cert-year">2566</span>
+    </div>
+  
+   
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="contact-box reveal">
+    <div class="eyebrow" style="color: var(--pastel);"></div>
+    <p>ช่องทางการติดต่อ</p>
+    <div class="contact-links">
+      <a class="contact-pill" href="pujnothipwedi@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        pujnothipwedi@gmail.com
+      </a>
+      <a class="contact-pill" href="tel:063-893-9097">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        063-893-9097
+      </a>
+      <a class="contact-pill" href="https://line.me/ti/p/THIPWADEE" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        LINE: THIPWADEE
+      </a>
+      <a class="contact-pill" href="https://instagram.com/ndzyrtt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+        @ndzyrtt
+      </a>
+      <a class="contact-pill" href="https://github.com/nadia" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        github.com/nadia
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ---- mobile nav toggle ----
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ---- scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ---- vine draw animation ----
+  const vine = document.querySelector('.vine-path');
+  const vineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        vine.classList.add('in');
+        vineObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  if (vine) vineObserver.observe(document.querySelector('.timeline'));
+
+  // ---- active nav link on scroll ----
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-link');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting){
+        navAnchors.forEach(a => a.style.color = 'var(--deep-2)');
+        link.style.color = 'var(--mid)';
+      }
+    });
+  }, { threshold: 0.4, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>
